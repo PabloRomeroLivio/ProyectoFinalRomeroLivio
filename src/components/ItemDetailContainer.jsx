@@ -42,7 +42,7 @@ const ItemDetailContainer = () => {
   }
 
   if (!producto) {
-    return <div className="text-center">Producto no encontrado</div>;
+    return <div className="text-center">Seleccione ver detalle en el producto que desee.</div>;
   }
 
   return <ItemDetail producto={producto} />;

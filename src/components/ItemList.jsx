@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";  
+import { Link } from "react-router-dom";
 import Item from "./Item";
 
 const ItemList = ({ productos }) => {

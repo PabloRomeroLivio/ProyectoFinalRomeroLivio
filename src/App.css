@@ -3,7 +3,23 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: rgb(216, 162, 94); 
+  background-color: rgb(216, 162, 94); /* Manteniendo el color original */
+}
+
+nav a {
+  color: white; /* Color blanco para los enlaces */
+  text-decoration: none; /* Quitar subrayado por defecto */
+  font-size: 16px; /* Tamaño de fuente legible */
+  margin: 0 10px; /* Espacio entre los enlaces */
+  transition: color 0.3s ease; /* Efecto suave al cambiar color */
+}
+
+nav a:hover {
+  color: rgb(160, 71, 71); /* Color al pasar el mouse (puedes usar otro si lo prefieres) */
+}
+
+nav a:active {
+  color: rgb(238, 223, 122); /* Color cuando el enlace esté activo */
 }
 
 .enlaces {
@@ -29,4 +45,22 @@ nav {
   border-radius: 50%;
   padding: 5px;
   font-size: 14px;
+}
+.btn {
+  background-color: rgb(216, 162, 94)!important; 
+  color: white!important; 
+  border: none!important; 
+  padding: 10px 20px!important; 
+  font-size: 16px!important; 
+  cursor: pointer!important; 
+  transition: background-color 0.3s ease!important; 
+}
+
+button:hover {
+  background-color: rgb(160, 71, 71)!important; 
+}
+
+
+button.carrito {
+  background-color: rgb(238, 223, 122)!important; 
 }

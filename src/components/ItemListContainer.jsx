@@ -40,8 +40,10 @@ const ItemListContainer = ({ greeting }) => {
 
   return (
     <div style={{ padding: "10px" }}>
-      <h2>{categoria ? `Categoría: ${categoria.replace("-", " ")}` : greeting}</h2>
-      {loading ? <p>Cargando productos...</p> : <ItemList productos={productos} />}
+      <h2 className="text-center text-dark mb-4">
+        {categoria ? `Categoría: ${categoria.replace("-", " ")}` : greeting}
+      </h2>
+      {loading ? <p className="text-center">Cargando productos...</p> : <ItemList productos={productos} />}
     </div>
   );
 };
