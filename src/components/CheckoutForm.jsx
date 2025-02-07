@@ -12,10 +12,12 @@ const CheckoutForm = () => {
   const [detalleCompra, setDetalleCompra] = useState([]);
   const [totalCompra, setTotalCompra] = useState(0);
 
+  // Maneja los cambios en los campos del formulario
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Función para actualizar el stock de un producto en Firestore
   const updateStock = async (productoId, cantidadComprada) => {
     const productoRef = doc(db, "productos", productoId);
     
@@ -42,14 +44,17 @@ const CheckoutForm = () => {
     }
   };
 
+  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validación de campos obligatorios
     if (!formData.nombre || !formData.email || !formData.direccion) {
       setError('Todos los campos son obligatorios.');
       return;
     }
 
+    // Verifica si hay suficiente stock para todos los productos en el carrito
     let stockSuficiente = true;
     for (const item of cart) {
       const esStockValido = await updateStock(item.id, item.cantidad);
@@ -64,7 +69,10 @@ const CheckoutForm = () => {
       return;
     }
 
+    // Calcula el total de la compra
     const total = cart.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+    
+    // Crea la orden de compra
     const order = {
       comprador: formData,
       productos: cart,
@@ -73,11 +81,12 @@ const CheckoutForm = () => {
     };
 
     try {
+      // Guarda la orden en Firestore
       const docRef = await addDoc(collection(db, 'orders'), order);
       setOrdenId(docRef.id);
       setDetalleCompra(cart);
       setTotalCompra(total);
-      clearCart();
+      clearCart(); // Vacía el carrito después de la compra
       setCompraFinalizada(true);
     } catch (error) {
       console.error('Error al guardar la orden:', error);
@@ -85,6 +94,7 @@ const CheckoutForm = () => {
     }
   };
 
+  // Muestra el resumen de la compra cuando se finaliza con éxito
   if (compraFinalizada) {
     return (
       <div className="d-flex justify-content-center align-items-center min-vh-100">
@@ -109,6 +119,7 @@ const CheckoutForm = () => {
     );
   }
 
+  // Formulario de compra
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
       <div className="card p-4" style={{ width: '30rem' }}>
